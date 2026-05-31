@@ -10,6 +10,11 @@ function App() {
       .then(data => setNotes(data))
   }, [])
 
+  function handleDelete(id) {
+    fetch(`http://localhost:8000/api/notes/${id}/`, { method: 'DELETE' })
+      .then(() => setNotes(notes.filter(n => n.id !== id)))
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
     fetch('http://localhost:8000/api/notes/', {
@@ -39,7 +44,10 @@ function App() {
       </form>
       <ul>
         {notes.map(note => (
-          <li key={note.id}>{note.content}</li>
+          <li key={note.id}>
+            {note.content}
+            <button onClick={() => handleDelete(note.id)} style={{ marginLeft: '0.5rem' }}>Delete</button>
+          </li>
         ))}
       </ul>
     </div>
