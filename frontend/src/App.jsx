@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import About from './About.jsx'
 
 const API = 'http://localhost:8000/api'
 
@@ -86,6 +88,7 @@ function Notes({ token, username, onLogout }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Notes</h1>
         <span>
+          <Link to="/about" style={{ marginRight: '1rem' }}>About</Link>
           {username} <button onClick={onLogout}>Logout</button>
         </span>
       </div>
@@ -132,6 +135,16 @@ export default function App() {
       })
   }
 
-  if (!token) return <LoginForm onLogin={handleLogin} />
-  return <Notes token={token} username={username} onLogout={handleLogout} />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/" element={
+          token
+            ? <Notes token={token} username={username} onLogout={handleLogout} />
+            : <LoginForm onLogin={handleLogin} />
+        } />
+      </Routes>
+    </BrowserRouter>
+  )
 }
