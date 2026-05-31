@@ -1,4 +1,5 @@
 asgiref==3.11.1
+waitress==3.0.2
 Django==6.0.5
 django-cors-headers==4.9.0
 djangorestframework==3.17.1
