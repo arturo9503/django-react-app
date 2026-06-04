@@ -4,6 +4,8 @@ from rest_framework.test import APITestCase
 
 from .models import Note
 
+# CI smoke test — safe to remove
+
 
 class HelloEndpointTest(APITestCase):
     def test_returns_message(self):
