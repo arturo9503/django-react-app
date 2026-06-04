@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -21,6 +22,7 @@ def login_view(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def logout_view(request):
     request.user.auth_token.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
@@ -50,6 +52,6 @@ def notes(request):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def note_detail(request, pk):
-    note = Note.objects.get(pk=pk)
+    note = get_object_or_404(Note, pk=pk)
     note.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
