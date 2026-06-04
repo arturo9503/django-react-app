@@ -6,3 +6,4 @@ repos:
         entry: python scripts/check_requirements.py
         language: system
         pass_filenames: false
+        always_run: true

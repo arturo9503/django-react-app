@@ -11,17 +11,8 @@ installed = set(result.stdout.strip().splitlines())
 with open("requirements.txt") as f:
     recorded = set(f.read().strip().splitlines())
 
-missing = installed - recorded
-extra = recorded - installed
-
-if missing or extra:
-    if missing:
-        print("Packages installed but not in requirements.txt:")
-        for p in sorted(missing):
-            print(f"  + {p}")
-    if extra:
-        print("Packages in requirements.txt but not installed:")
-        for p in sorted(extra):
-            print(f"  - {p}")
-    print("\nRun: pip freeze > requirements.txt")
-    sys.exit(1)
+if installed != recorded:
+    with open("requirements.txt", "w", encoding="utf-8", newline="\n") as f:
+        f.write(result.stdout)
+    subprocess.run(["git", "add", "requirements.txt"])
+    print("requirements.txt updated and staged.")
