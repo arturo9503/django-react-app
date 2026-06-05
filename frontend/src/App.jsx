@@ -8,7 +8,7 @@ function authHeaders(token) {
   return { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
 }
 
-function LoginForm({ onLogin }) {
+export function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -54,7 +54,7 @@ function LoginForm({ onLogin }) {
   )
 }
 
-function Notes({ token, username, onLogout }) {
+export function Notes({ token, username, onLogout }) {
   const [notes, setNotes] = useState([])
   const [content, setContent] = useState('')
 
