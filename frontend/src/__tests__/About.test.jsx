@@ -1,7 +1,7 @@
 // test CI
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import About from '../About'
+import About from '../components/About'
 
 it('has a link back to the home page', () => {
   render(<MemoryRouter><About /></MemoryRouter>)

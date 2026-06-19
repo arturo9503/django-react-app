@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { LoginForm } from '../App'
+import LoginForm from '../components/LoginForm'
 
 const onLogin = vi.fn()
 
